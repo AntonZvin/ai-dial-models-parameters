@@ -1,4 +1,4 @@
-from task.app.main import run
+from app.main import run
 
 # TODO:
 #  Try `presence_penalty` parameter.
@@ -8,11 +8,35 @@ from task.app.main import run
 #       Default: 0.0
 #  User massage: What is an entropy in LLM's responses?
 
+# Test with different presence_penalty values - compare topic diversity
+
+print("\n\n=== Testing presence_penalty=0.0 (default) ===")
 run(
     deployment_name='gpt-4o',
     print_only_content=True,
-    # TODO:
-    #  Use `presence_penalty` parameter with different range (-2.0 to 2.0)
+    presence_penalty=0.0,
+)
+
+print("\n\n=== Testing presence_penalty=1.0 (encourage new topics) ===")
+run(
+    deployment_name='gpt-4o',
+    print_only_content=True,
+    presence_penalty=1.0,
+)
+
+print("\n\n=== Testing presence_penalty=2.0 (strongly encourage new topics) ===")
+run(
+    deployment_name='gpt-4o',
+    print_only_content=True,
+    presence_penalty=2.0,
+)
+
+# Optional: Test negative values (focuses on same topics)
+print("\n\n=== Testing presence_penalty=-1.0 (focus on same topics) ===")
+run(
+    deployment_name='gpt-4o',
+    print_only_content=True,
+    presence_penalty=-1.0,
 )
 
 # In the final result, we can see that the higher `presence_penalty` (2.0) the more LLM is trying to add topics that

@@ -1,4 +1,4 @@
-from task.app.main import run
+from app.main import run
 
 # TODO:
 #  Try `stop` parameter.
@@ -7,13 +7,28 @@ from task.app.main import run
 #       Default: None
 #  User massage: Explain the key components of a Large Language Model architecture
 
+# Test with different stop parameters - response will be cut at specified sequences
+
+print("\n\n=== Testing stop='\\n\\n' (stop at double newline) ===")
 run(
     deployment_name='gpt-4o',
     print_only_content=True,
-    # TODO:
-    #  1. Use `stop` parameter with value "\n\n"
-    #  2. Use `stop` parameter with values ["**Embedding Layer**", "**Transformer Blocks**", "**Training**"]
-    #  3. Optional: Set `print_only_content` as False to see the full JSON and what is the `finish_reason`
+    stop="\n\n",
+)
+
+print("\n\n=== Testing stop sequences for specific topics ===")
+run(
+    deployment_name='gpt-4o',
+    print_only_content=False,  # Show full response to see finish_reason
+    stop=["**Embedding Layer**", "**Transformer Blocks**", "**Training**"],
+)
+
+# Optional: Test with custom stop words
+print("\n\n=== Testing custom stop words ===")
+run(
+    deployment_name='gpt-4o',
+    print_only_content=True,
+    stop=["architecture", "components"],
 )
 
 # With `stop` parameter we can stop content generation. It can be used for some policies/guardrails. For instance,

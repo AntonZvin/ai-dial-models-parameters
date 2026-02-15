@@ -1,4 +1,4 @@
-from task.app.main import run
+from app.main import run
 
 # TODO:
 #  Try the `n` parameter with different models (`deployment_name`). With the parameter `n`, we can configure how many
@@ -10,10 +10,27 @@ from task.app.main import run
 # - claude-3-7-sonnet@20250219
 # - gemini-2.5-pro
 
+# Test with different models and n parameter values - uncomment one at a time
+
+# Test with GPT-4o and n=3
+print("\n\n=== Testing GPT-4o with n=3 ===")
 run(
-    # TODO:
-    #  1. Provide `deployment_name` with model from the list above👆
-    #  2. Use `n` parameter with value in range from 1 to 5!
+    deployment_name='gpt-4o',
+    n=3,
+)
+
+# Test with Claude and n=2
+print("\n\n=== Testing Claude-3-7-Sonnet with n=2 ===")
+run(
+    deployment_name='claude-3-7-sonnet@20250219',
+    n=2,
+)
+
+# Test with Gemini and n=4
+print("\n\n=== Testing Gemini-2.5-Pro with n=4 ===")
+run(
+    deployment_name='gemini-2.5-pro',
+    n=4,
 )
 
 # Pay attention to the number of choices in the response!
